@@ -4,9 +4,35 @@
 <title>Our Funky HTML Page</title>
 <meta name="description" content="Our first page">
 <meta name="keywords" content="html tutorial template">
+<style>
+.rotating {
+   animation: rotate 1s infinite;
+}
+
+@keyframes rotate {
+   from { transform: rotate(0deg); }
+   to { transform: rotate(360deg); }
+}
+</style>
+<script>
+window.addEventListener('load', function () {
+const eggdude = document.querySelector("#eggdude")
+const p = document.querySelector("#prompt")
+eggdude.addEventListener('click', function() {
+	if (eggdude.classList.contains('rotating')) {
+		eggdude.classList = []
+		p.textContent = "Click EGGDUDE!"
+	} else {
+   		eggdude.classList.add('rotating')
+		p.textContent = "IM SOOOO DIZZY 😵‍💫 Click me again to stop me!"
+	}
+});
+})
+</script>
 </head>
 <body>
-	hi-Marcel
-	<img src="eggdude.png" width="100%">
+	<h1>Marcel's HOMEPAGE</h1>
+	<h3 id="prompt">Click EGGDUDE!</h3>
+	<img id="eggdude" src="eggdude.png" width="100%">
 </body>
 </html>
