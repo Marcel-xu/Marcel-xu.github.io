@@ -21,12 +21,23 @@
     </style>
 </head>
 <body>
-    <canvas id="canvas" width="400" height="300"></canvas>
+    <canvas id="canvas"></canvas>
     <button id="add-ball">Add Ball</button>
 
     <script>
         const canvas = document.getElementById("canvas");
         const ctx = canvas.getContext("2d");
+        
+        // Set dynamic canvas size
+        function resizeCanvas() {
+            canvas.width = Math.min(window.innerWidth * 0.9);
+            canvas.height = Math.min(window.innerHeight * 0.8);
+        }
+        
+        // Initial resize and listen for window resize
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
         `
         What did Marcel do?
 
