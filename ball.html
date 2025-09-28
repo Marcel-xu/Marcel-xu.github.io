@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bouncing Ball</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #222;
+        }
+        canvas {
+            border: 2px solid #fff;
+            background-color: #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="400" height="300"></canvas>
+    <button id="add-ball">Add Ball</button>
+
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        `
+        What did Marcel do?
+
+        ✅ 1. He created a new ball object (makeBall function)
+        ✅ 2. I copied the functions except the animate one (reused existing function)
+        ✅ 3. I changed all the ball objects to the new one (added ball parameter)
+        `;
+
+        function makeBall() {
+          return {
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            radius: 20,
+        
+            // [] -> inclusive
+            // () -> exclusive
+        
+            // let n = Math.random();
+            // n      : [0, 1)
+            // 5n     : [0, 5)
+            // 5n + 5 : [5, 10)
+        
+            dx: Math.random() * 5 + 5,
+            dy: Math.random() * 5 + 5,
+            color: "red",
+            border_color: "yellow",
+          };
+        }
+
+        function drawBall(ball) {
+          ctx.beginPath();
+          ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+          ctx.fillStyle = ball.color;
+          ctx.fill();
+          ctx.strokeStyle = ball.border_color;
+          ctx.lineWidth = 10;
+          ctx.stroke();
+          ctx.closePath();
+        }
+
+        function updateBall(ball) {
+          // Move the ball
+          ball.x += ball.dx; // ball.x = ball.x + ball.dx;
+          ball.y += ball.dy;
+        
+          // Bounce off walls
+          //                                      or
+          if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) {
+            ball.dx = -ball.dx;
+          }
+          if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {
+            ball.dy = -ball.dy;
+          }
+        }
+
+        let balls = [];
+
+        const button = document.getElementById("add-ball");
+        button.addEventListener("click", () => {
+          balls.push(makeBall());
+        });
+
+        function animate() {
+          // Clear canvas
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+          // Update and draw balls
+          for (let ball of balls) {
+            updateBall(ball);
+            drawBall(ball);
+          }
+      
+          // Continue animation
+          requestAnimationFrame(animate);
+        }
+
+        `
+        When you click the button, it should:
+
+        ✅ 1. Make a ball (event listener! - onclick)
+        ✅ 2. Continuously update and draw all balls
+        `;
+
+        // // Start the animation
+        animate();
+    </script>
+</body>
+</html>
